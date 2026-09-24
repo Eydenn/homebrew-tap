@@ -25,10 +25,10 @@ class Loomy < Formula
   desc "Orchestre Codex et Claude Code : rôles routés par coût, journal, suivi terminal"
   homepage "https://github.com/Eydenn/loomy"
   url "https://github.com/Eydenn/loomy.git",
-      tag:      "v0.1.1",
-      revision: "6243890d635d75e93ebf24ed714adb06b1284ad0",
+      tag:      "v0.1.2",
+      revision: "02793feec7e516185f71d54c20be2a19658e6d0c",
       using:    LoomyPrivateGitDownloadStrategy
-  version "0.1.1"
+  version "0.1.2"
   head "https://github.com/Eydenn/loomy.git", branch: "main", using: LoomyPrivateGitDownloadStrategy
 
   def install

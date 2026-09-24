@@ -28,7 +28,7 @@ class Loomy < Formula
       tag:      "v0.1.18",
       revision: "43f9eeb7c7de32cb8c14b0be773af342bf83f30a",
       using:    LoomyPrivateGitDownloadStrategy
-  version "0.1.16"
+  version "0.1.18"
   head "https://github.com/Eydenn/loomy.git", branch: "main", using: LoomyPrivateGitDownloadStrategy
 
   def install

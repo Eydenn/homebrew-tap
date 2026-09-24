@@ -1,12 +1,12 @@
 # Formule Homebrew de Loomy. Le dépôt source est privé : Homebrew le clone avec Git,
 # donc avec les identifiants GitHub de la machine (gh auth login).
 class Loomy < Formula
-  desc "Orchestre Codex et Claude Code : rôles routés par coût, journal, suivi terminal ou web"
+  desc "Orchestre Codex et Claude Code : rôles routés par coût, journal, suivi terminal"
   homepage "https://github.com/Eydenn/loomy"
   url "https://github.com/Eydenn/loomy.git",
-      tag:      "v2.0.1",
-      revision: "e08a30ab1fae4c1224b8818e6d21cfaf451f290a"
-  version "2.0.1"
+      tag:      "v0.1.0",
+      revision: "0548a692527e6b06b5b7f50032ce234cac360655"
+  version "0.1.0"
   head "https://github.com/Eydenn/loomy.git", branch: "main"
 
   def install
@@ -18,7 +18,8 @@ class Loomy < Formula
     <<~EOS
       Vérifiez la machine avec :
         loomy doctor --fix --live
-      Le tableau de bord web (loomy dashboard) nécessite Node >= 18 ou Bun.
+      Suivi en direct d'un projet :
+        loomy watch
     EOS
   end
 

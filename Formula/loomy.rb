@@ -1,13 +1,35 @@
-# Formule Homebrew de Loomy. Le dépôt source est privé : Homebrew le clone avec Git,
-# donc avec les identifiants GitHub de la machine (gh auth login).
+# Formule Homebrew de Loomy. Le dépôt source est privé.
+#
+# Homebrew clone les sources dans un bac à sable qui n'a pas accès au trousseau macOS : le jeton
+# GitHub lui est transmis par HOMEBREW_GITHUB_API_TOKEN, le temps du téléchargement seulement.
+#   HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)" brew install eydenn/tap/loomy
+# « loomy update » le fait automatiquement.
+class LoomyPrivateGitDownloadStrategy < GitDownloadStrategy
+  def fetch(timeout: nil)
+    token = ENV.fetch("HOMEBREW_GITHUB_API_TOKEN", "")
+    return super if token.empty?
+
+    # Équivaut à « git -c http.https://github.com/.extraheader=… » : rien n'est écrit dans le dépôt cloné.
+    header = "Authorization: Basic #{["x-access-token:#{token}"].pack("m0")}"
+    saved = ENV.fetch("GIT_CONFIG_PARAMETERS", nil)
+    begin
+      ENV["GIT_CONFIG_PARAMETERS"] = "'http.https://github.com/.extraheader=#{header}'"
+      super
+    ensure
+      ENV["GIT_CONFIG_PARAMETERS"] = saved
+    end
+  end
+end
+
 class Loomy < Formula
   desc "Orchestre Codex et Claude Code : rôles routés par coût, journal, suivi terminal"
   homepage "https://github.com/Eydenn/loomy"
   url "https://github.com/Eydenn/loomy.git",
       tag:      "v0.1.0",
-      revision: "0548a692527e6b06b5b7f50032ce234cac360655"
+      revision: "0548a692527e6b06b5b7f50032ce234cac360655",
+      using:    LoomyPrivateGitDownloadStrategy
   version "0.1.0"
-  head "https://github.com/Eydenn/loomy.git", branch: "main"
+  head "https://github.com/Eydenn/loomy.git", branch: "main", using: LoomyPrivateGitDownloadStrategy
 
   def install
     libexec.install Dir["*"]

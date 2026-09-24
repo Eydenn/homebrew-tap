@@ -22,13 +22,13 @@ class LoomyPrivateGitDownloadStrategy < GitDownloadStrategy
 end
 
 class Loomy < Formula
-  desc "Orchestre Codex et Claude Code : rôles routés par coût, journal, suivi terminal"
+  desc "Démarre et structure des projets avec Codex et Claude Code"
   homepage "https://github.com/Eydenn/loomy"
   url "https://github.com/Eydenn/loomy.git",
-      tag:      "v0.1.5",
-      revision: "fdc1cfbd151912cbfeeea5ded751c4f8c82d1c1c",
+      tag:      "v0.1.6",
+      revision: "96013c5e10c142ea11cad2c018ab22cca087af22",
       using:    LoomyPrivateGitDownloadStrategy
-  version "0.1.5"
+  version "0.1.6"
   head "https://github.com/Eydenn/loomy.git", branch: "main", using: LoomyPrivateGitDownloadStrategy
 
   def install

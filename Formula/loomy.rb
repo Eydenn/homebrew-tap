@@ -1,15 +1,15 @@
-# Formule Homebrew de Loomy. Le dépôt source est privé.
+# Loomy's Homebrew formula. The source repository is private.
 #
-# Homebrew clone les sources dans un bac à sable qui n'a pas accès au trousseau macOS : le jeton
-# GitHub lui est transmis par HOMEBREW_GITHUB_API_TOKEN, le temps du téléchargement seulement.
+# Homebrew clones the sources in a sandbox without access to the macOS keychain: the GitHub
+# token is passed through HOMEBREW_GITHUB_API_TOKEN, only for the download.
 #   HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)" brew install eydenn/tap/loomy
-# « loomy update » le fait automatiquement.
+# "loomy update" does it automatically.
 class LoomyPrivateGitDownloadStrategy < GitDownloadStrategy
   def fetch(timeout: nil)
     token = ENV.fetch("HOMEBREW_GITHUB_API_TOKEN", "")
     return super if token.empty?
 
-    # Équivaut à « git -c http.https://github.com/.extraheader=… » : rien n'est écrit dans le dépôt cloné.
+    # Same as "git -c http.https://github.com/.extraheader=…": nothing is written into the cloned repository.
     header = "Authorization: Basic #{["x-access-token:#{token}"].pack("m0")}"
     saved = ENV.fetch("GIT_CONFIG_PARAMETERS", nil)
     begin
@@ -22,7 +22,7 @@ class LoomyPrivateGitDownloadStrategy < GitDownloadStrategy
 end
 
 class Loomy < Formula
-  desc "Démarre et structure des projets avec Codex et Claude Code"
+  desc "Starts and structures projects with Codex and Claude Code"
   homepage "https://github.com/Eydenn/loomy"
   url "https://github.com/Eydenn/loomy.git",
       tag:      "v0.4.0",
@@ -38,9 +38,9 @@ class Loomy < Formula
 
   def caveats
     <<~EOS
-      Vérifiez la machine avec :
+      Check the machine with:
         loomy doctor --fix --live
-      Suivi en direct d'un projet :
+      Live tracking of a project:
         loomy watch
     EOS
   end

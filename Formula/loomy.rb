@@ -25,10 +25,10 @@ class Loomy < Formula
   desc "Starts and structures projects with Codex and Claude Code"
   homepage "https://github.com/Eydenn/loomy"
   url "https://github.com/Eydenn/loomy.git",
-      tag:      "v0.10.0",
-      revision: "64c2ad37385684975c52cf94832fb3d281446795",
+      tag:      "v0.11.0",
+      revision: "c91cd73020e1d24d787fd74ab80719d8cb55d0f1",
       using:    LoomyPrivateGitDownloadStrategy
-  version "0.10.0"
+  version "0.11.0"
   head "https://github.com/Eydenn/loomy.git", branch: "main", using: LoomyPrivateGitDownloadStrategy
 
   def install

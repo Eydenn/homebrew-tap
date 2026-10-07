@@ -1,35 +1,10 @@
-# Loomy's Homebrew formula. The source repository is private.
-#
-# Homebrew clones the sources in a sandbox without access to the macOS keychain: the GitHub
-# token is passed through HOMEBREW_GITHUB_API_TOKEN, only for the download.
-#   HOMEBREW_GITHUB_API_TOKEN="$(gh auth token)" brew install eydenn/tap/loomy
-# "loomy update" does it automatically.
-class LoomyPrivateGitDownloadStrategy < GitDownloadStrategy
-  def fetch(timeout: nil)
-    token = ENV.fetch("HOMEBREW_GITHUB_API_TOKEN", "")
-    return super if token.empty?
-
-    # Same as "git -c http.https://github.com/.extraheader=…": nothing is written into the cloned repository.
-    header = "Authorization: Basic #{["x-access-token:#{token}"].pack("m0")}"
-    saved = ENV.fetch("GIT_CONFIG_PARAMETERS", nil)
-    begin
-      ENV["GIT_CONFIG_PARAMETERS"] = "'http.https://github.com/.extraheader=#{header}'"
-      super
-    ensure
-      ENV["GIT_CONFIG_PARAMETERS"] = saved
-    end
-  end
-end
-
 class Loomy < Formula
-  desc "Starts and structures projects with Codex and Claude Code"
+  desc "AI development team, orchestrated: Claude Code and Codex on your projects"
   homepage "https://github.com/Eydenn/loomy"
-  url "https://github.com/Eydenn/loomy.git",
-      tag:      "v0.12.3",
-      revision: "4530c0c5a4b41fb85eddc35237b90ba1b63c5256",
-      using:    LoomyPrivateGitDownloadStrategy
-  version "0.12.3"
-  head "https://github.com/Eydenn/loomy.git", branch: "main", using: LoomyPrivateGitDownloadStrategy
+  url "https://github.com/Eydenn/loomy/archive/refs/tags/v0.13.0.tar.gz"
+  sha256 "fff5ddd19c8d4f91c0fd36bef5fee3bb313da336868764674222958334915343"
+  license "Apache-2.0"
+  head "https://github.com/Eydenn/loomy.git", branch: "main"
 
   def install
     libexec.install Dir["*"]
@@ -40,8 +15,8 @@ class Loomy < Formula
     <<~EOS
       Check the machine with:
         loomy doctor --fix --live
-      Live tracking of a project:
-        loomy watch
+      Then create a project:
+        loomy init
     EOS
   end
 

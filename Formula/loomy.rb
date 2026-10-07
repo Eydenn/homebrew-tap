@@ -26,7 +26,7 @@ class Loomy < Formula
   homepage "https://github.com/Eydenn/loomy"
   url "https://github.com/Eydenn/loomy.git",
       tag:      "v0.12.3",
-      revision: "220843e8b6ec564f8df83193cec78720ac48b57d",
+      revision: "4530c0c5a4b41fb85eddc35237b90ba1b63c5256",
       using:    LoomyPrivateGitDownloadStrategy
   version "0.12.3"
   head "https://github.com/Eydenn/loomy.git", branch: "main", using: LoomyPrivateGitDownloadStrategy

@@ -1,8 +1,8 @@
 class Loomy < Formula
   desc "AI development team, orchestrated: Claude Code and Codex on your projects"
   homepage "https://github.com/Eydenn/loomy"
-  url "https://github.com/Eydenn/loomy/archive/refs/tags/v0.14.0.tar.gz"
-  sha256 "7341e8e6f5e51652927b8e0acbca0c024939140f679ee8a60868c56ad224e8d7"
+  url "https://github.com/Eydenn/loomy/archive/refs/tags/v0.15.0.tar.gz"
+  sha256 "2a935722e1e14c661b805b07d34e369d1f7e96e789eab574d2190da8c7261bee"
   license "Apache-2.0"
   head "https://github.com/Eydenn/loomy.git", branch: "main"
 
